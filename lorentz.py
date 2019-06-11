@@ -11,11 +11,18 @@ def lorentz(beta, x, ct):
     return np.divide(one, np.sqrt(np.subtract(one, np.power(beta, 2))))
 
 # result in spacetime meters
-def xprime(lorentz, beta, x):
-    return np.multiply(lorentz, np.subtract(one, np.multiply(beta, x)))
+def xprime(lorentz, beta, x, ct):
+    return np.multiply(lorentz, np.subtract(x, np.multiply(beta, ct)))
 
-beta = np.array([0.99999, 0.95])
-x = np.array([1, 1])
-ct = np.array([1, 1])
-print(xprime(lorentz(beta, x, ct), beta, x))
+def ctprime(lorentz, beta, x, ct):
+    return np.multiply(lorentz, np.subtract(ct, np.multiply(beta, x)))
 
+beta = np.array([0.99999, 0.99999])
+x = np.array([1, 2])
+ct = np.array([1, 2])
+lor = lorentz(beta, x, ct)
+xpr = xprime(lor, beta, x, ct)
+ctpr = ctprime(lor, beta, x, ct)
+
+print(xpr)
+print(ctpr)
